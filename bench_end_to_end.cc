@@ -481,17 +481,17 @@ int main(int argc, char** argv) {
   const string index_type = argv[3];
   const uint32_t max_error = (argc == 5) ? atoi(argv[4]) : 0;
 
-  if (data_file.find("32") != string::npos) {
-    if (index_type == "rs")
+  if (data_file.find("32") != string::npos) {//32位数据集
+    if (index_type == "rs")//测试rs
       RunRS<uint32_t>(data_file, lookup_file);
-    else if ((index_type == "ts") && (!max_error))
+    else if ((index_type == "ts") && (!max_error))//测试ts
       RunTS<uint32_t>(data_file, lookup_file);
     else
       CustomRunTS<uint32_t>(data_file, lookup_file, max_error);
-  } else {
-    if (index_type == "rs")
+  } else {//64位数据集
+    if (index_type == "rs")//测试rs
       RunRS<uint64_t>(data_file, lookup_file);
-    else if ((index_type == "ts") && (!max_error))
+    else if ((index_type == "ts") && (!max_error))//测试ts
       RunTS<uint64_t>(data_file, lookup_file);
     else
       CustomRunTS<uint64_t>(data_file, lookup_file, max_error);

@@ -19,13 +19,13 @@ template <class KeyType>
 class Builder {
  public:
   Builder(KeyType min_key, KeyType max_key, size_t spline_max_error)
-      : min_key_(min_key),
-        max_key_(max_key),
-        spline_max_error_(spline_max_error),
-        curr_num_keys_(0),
-        curr_num_distinct_keys_(0),
-        prev_key_(min_key),
-        prev_position_(0),
+      : min_key_(min_key),//最小值
+        max_key_(max_key),//最大值
+        spline_max_error_(spline_max_error),//spline-error
+        curr_num_keys_(0),//当前加入的CDF points的数量
+        curr_num_distinct_keys_(0),//当前加入的 distinct CDF points的数量
+        prev_key_(min_key),//上一个CDF point 的key
+        prev_position_(0),//上一个CDF point 的pos
         chtb_(min_key, max_key) {}
 
   // Adds a key. Assumes that keys are stored in a dense array.

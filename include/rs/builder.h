@@ -15,16 +15,16 @@ class Builder {
  public:
   Builder(KeyType min_key, KeyType max_key, size_t num_radix_bits = 18,
           size_t max_error = 32)
-      : min_key_(min_key),
-        max_key_(max_key),
-        num_radix_bits_(num_radix_bits),
+      : min_key_(min_key),//最小值
+        max_key_(max_key),//最大值
+        num_radix_bits_(num_radix_bits),//使用的prefix-length
         num_shift_bits_(GetNumShiftBits(max_key - min_key, num_radix_bits)),
-        max_error_(max_error),
-        curr_num_keys_(0),
-        curr_num_distinct_keys_(0),
-        prev_key_(min_key),
-        prev_position_(0),
-        prev_prefix_(0) {
+        max_error_(max_error),//spline-error
+        curr_num_keys_(0),//当前加入的CDF points的数量
+        curr_num_distinct_keys_(0),//当前加入的 distinct CDF points的数量
+        prev_key_(min_key),//上一个CDF point 的key
+        prev_position_(0),//上一个CDF point 的pos
+        prev_prefix_(0) {//上一个spline point的prefix
     // Initialize radix table, needs to contain all prefixes up to the largest
     // key + 1.
     const uint32_t max_prefix = (max_key - min_key) >> num_shift_bits_;
